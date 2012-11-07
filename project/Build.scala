@@ -1,6 +1,6 @@
 import sbt._
 import Keys._
-import com.jsuereth.pgp.sbtplugin._
+//import com.jsuereth.pgp.sbtplugin._
 
 
 object Build extends Build {
@@ -11,8 +11,8 @@ object Build extends Build {
     shellPrompt := { s => Project.extract(s).currentProject.id + " > " }
   }
 
-  val basicSettings = PgpPlugin.settings ++ seq(
-    version               := "1.1.3",
+  val basicSettings = /*PgpPlugin.settings ++ */ seq(
+    version               := "1.1.3.vivo_1",
     scalaVersion          := "2.10.0-RC1",
     homepage              := Some(new URL("http://parboiled.org")),
     organization          := "org.parboiled",
@@ -48,13 +48,15 @@ object Build extends Build {
     publishMavenStyle := true,
     publishArtifact in Test := false,
     pomIncludeRepository := { _ => false },
-    PgpPlugin.useGpg := true,
-    PgpPlugin.pgpSigningKey := Some(-2321133875171851978L),
-    publishTo <<= version { v: String =>
-      val nexus = "https://oss.sonatype.org/"
-      if (v.trim.endsWith("SNAPSHOT")) Some("snapshots" at nexus + "content/repositories/snapshots")
-      else                             Some("releases" at nexus + "service/local/staging/deploy/maven2")
-    },
+    //PgpPlugin.useGpg := true,
+    //PgpPlugin.pgpSigningKey := Some(-2321133875171851978L),
+    //publishTo <<= version { v: String =>
+    //  val nexus = "https://oss.sonatype.org/"
+    //  if (v.trim.endsWith("SNAPSHOT")) Some("snapshots" at nexus + "content/repositories/snapshots")
+    //  else                             Some("releases" at nexus + "service/local/staging/deploy/maven2")
+    //},
+    publishTo := Some("VIVO Systems Artifactory" at "https://tools.vivosys.com/artifactory/ext-release-local"),
+    credentials += Credentials(Path.userHome / ".ivy2" / ".credentials"),
     pomExtra :=
       <scm>
         <url>git@github.com:sirthias/parboiled.git</url>

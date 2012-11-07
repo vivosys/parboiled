@@ -5,7 +5,7 @@
     <artifactId>parboiled-osgi</artifactId>
     <name>Parboiled OSGi bundle</name>
     <description>Parboiled is a mixed Java/Scala library providing for lightweight and easy-to-use, yet powerful and elegant parsing of arbitrary input text based on Parsing expression grammars (PEGs). PEGs are an alternative to context free grammars (CFGs) for formally specifying syntax, they make a good replacement for regular expressions and generally have quite a few advantages over the "traditional" way of building parsers via CFGs.</description>
-    <version>1.1.3</version>
+    <version>1.1.3.vivo_1</version>
     <inceptionYear>2010</inceptionYear>
     <packaging>bundle</packaging>
     <licenses>
