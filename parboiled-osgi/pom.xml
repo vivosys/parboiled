@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.parboiled</groupId>
+    <artifactId>parboiled-osgi</artifactId>
+    <name>Parboiled OSGi bundle</name>
+    <description>Parboiled is a mixed Java/Scala library providing for lightweight and easy-to-use, yet powerful and elegant parsing of arbitrary input text based on Parsing expression grammars (PEGs). PEGs are an alternative to context free grammars (CFGs) for formally specifying syntax, they make a good replacement for regular expressions and generally have quite a few advantages over the "traditional" way of building parsers via CFGs.</description>
+    <version>1.1.3</version>
+    <inceptionYear>2010</inceptionYear>
+    <packaging>bundle</packaging>
+    <licenses>
+        <license>
+            <name>Apache 2</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.5</source>
+                    <target>1.5</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+
+                        <Embed-Dependency>parboiled-core, parboiled-java, asm, asm-tree, asm-analysis</Embed-Dependency>
+                        <Embed-Transitive>true</Embed-Transitive>
+
+			<!-- shouldn't have to do this but parboiled requires access to the implementation bundles -->
+			<Import-Package><![CDATA[
+			   org.pegdown;version="[1.2.0, 1.3.0)";resolution:="optional",
+			   org.pegdown.ast;version="[1.2.0, 1.3.0)";resolution:="optional",
+			   *
+			]]>
+			</Import-Package>
+                        <_exportcontents>
+                            org.parboiled.*;version=${project.version}
+                        </_exportcontents>
+
+                    </instructions>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.parboiled</groupId>
+            <artifactId>parboiled-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.parboiled</groupId>
+            <artifactId>parboiled-java</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
+  <repositories>
+    <!-- Override (disable) central -->
+    <repository>
+      <id>central</id>
+      <url>http://repo1.maven.org/maven2</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+    </repository>
+    <repository>
+      <id>vivosys-repo</id>
+      <name>VIVO Repository</name>
+      <url>https://tools.vivosys.com/artifactory/repo</url>
+    </repository>
+    <repository>
+      <id>apache.snapshots</id>
+      <name>Apache Snapshot Repository</name>
+      <url>http://repository.apache.org/snapshots</url>
+      <releases>                                                                                                                                                                                                                                                                             
+        <enabled>false</enabled>                                                                                                                                                                                                                                                             
+      </releases>                                                                                                                                                                                                                                                                            
+      <snapshots>                                                                                                                                                                                                                                                                            
+        <enabled>false</enabled>                                                                                                                                                                                                                                                             
+      </snapshots>                                                                                                                                                                                                                                                                           
+    </repository>                                                                                                                                                                                                                                                                            
+  </repositories>      
+</project>
